@@ -1,0 +1,13 @@
+model Country {
+    name     String @map("name") @db.VarChar(400)
+    code     String @unique @map("code") @db.VarChar(5)
+    codeIso3 String @id @unique @map("code_iso3") @db.VarChar(5)
+
+    // Timestamps
+    createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+    updatedAt DateTime? @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+    // Indexes
+    @@index([name], name: "idx_country_name")
+    @@map("countries")
+}
