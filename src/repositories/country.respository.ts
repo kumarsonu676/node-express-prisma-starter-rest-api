@@ -5,11 +5,11 @@ import { PrismaService } from '../services/prisma.service';
 
 @injectable()
 export class CountryRepository {
-  constructor(private prismaService = container.get<PrismaService>(TYPES.PrismaService)) {
-    this.prismaService = prismaService;
+  constructor(private prisma = container.get<PrismaService>(TYPES.PrismaService)) {
+    this.prisma = prisma;
   }
 
   async findAll() {
-    return this.prismaService.country.findMany();
+    return this.prisma.country.findMany();
   }
 }
