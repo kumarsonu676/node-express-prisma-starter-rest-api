@@ -130,6 +130,6 @@ dist
 .pnp.*
 
 /http_requests
-/prisma/generated/prisma
+/src/prisma/generated/prisma
 /public/uploads
 /.agents
