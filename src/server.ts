@@ -1,15 +1,19 @@
-import app from "./app";
-import { prisma } from "./config/database";
+import app from './app';
+import container from './config/ioc.config';
+import { TYPES } from './config/ioc.types';
+import { PrismaService } from './services/prisma.service';
 
 const PORT = process.env.PORT || 3001;
 
-process.on("SIGINT", async () => {
-  await prisma.$disconnect();
+const prismaService = container.get<PrismaService>(TYPES.PrismaService);
+
+process.on('SIGINT', async () => {
+  await prismaService.$disconnect();
   process.exit(0);
 });
 
-process.on("SIGTERM", async () => {
-  await prisma.$disconnect();
+process.on('SIGTERM', async () => {
+  await prismaService.$disconnect();
   process.exit(0);
 });
 
