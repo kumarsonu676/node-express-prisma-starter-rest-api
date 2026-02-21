@@ -6,7 +6,7 @@ import appConfig from "./app.config";
 
 export const prisma = new PrismaClient({
   adapter: new PrismaPg({
-    connectionString: appConfig.db.url,
+    connectionString: appConfig.database.url,
   }),
   log:
     appConfig.environment === "development"
