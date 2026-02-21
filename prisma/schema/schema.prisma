@@ -1,0 +1,9 @@
+generator client {
+  provider        = "prisma-client"
+  output          = "../../prisma/generated/prisma"
+  previewFeatures = ["strictUndefinedChecks"]
+}
+
+datasource db {
+  provider = "postgresql"
+}

@@ -1,0 +1,42 @@
+{
+  "name": "cricko-api",
+  "version": "1.0.0",
+  "description": "Cricket scoring app api",
+  "main": "server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "nodemon --watch src --exec ts-node src/server.ts",
+    "build": "tsc",
+    "create_migration": "prisma migrate dev --create-only --name ",
+    "update_database": "prisma migrate dev",
+    "validate_schema": "prisma validate",
+    "generate_prisma_client": "prisma generate"
+  },
+  "author": "Sonu Sharma",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.4.1",
+    "@prisma/client": "^7.4.1",
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "inversify": "^7.11.0",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.18.0",
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.3.0",
+    "@types/pg": "^8.16.0",
+    "nodemon": "^3.1.14",
+    "prisma": "^7.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
