@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import container from '../config/ioc.config';
 import { TYPES } from '../config/ioc.types';
 import UnitOfService from '../services/unitof.service';
+import { ok } from '../utils/api-response';
 
 export class HealthController {
   constructor(private unitOfService = container.get<UnitOfService>(TYPES.UnitOfService)) {
@@ -9,6 +10,6 @@ export class HealthController {
   }
 
   public checkHealth = async (req: Request, res: Response): Promise<Response> => {
-    return res.status(200).json({ status: 'UP' });
+    return ok(req, res, { status: 'UP' });
   };
 }
