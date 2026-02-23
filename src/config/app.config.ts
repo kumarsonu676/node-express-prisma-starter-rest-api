@@ -1,51 +1,59 @@
 import dotenv from "dotenv";
+import { validateEnv, Env } from "./env.schema";
 
 dotenv.config();
 dotenv.config({ path: `.env.${process.env.NODE_ENV || "development"}` });
 
+const env = validateEnv();
+
 const appConfig = {
-  jwt: {
-    secret: process.env.JWT_SECRET || "",
-    audience: process.env.JWT_AUDIENCE || "",
-    issuer: process.env.JWT_ISSUER || "",
-  },
-  environment: process.env.NODE_ENV || "development",
-  port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3001,
-  api: {
-    clientId: process.env.CLIENT_ID || "",
-  },
-  app: {
-    name: process.env.APP_NAME || "Cricko API",
-    version: process.env.APP_VERSION || "1.0.0",
-    mode: process.env.APP_MODE || "local",
-    description:
-      process.env.APP_DESCRIPTION ||
-      "Cricko API for cricket match data management",
-    author: process.env.APP_AUTHOR || "Cricko API",
-    url: process.env.APP_URL || "http://localhost:3000",
-  },
-  database: {
-    url: process.env.DATABASE_URL || "",
-  },
-  azureStorage: {
-    connectionString: process.env.AZURE_STORAGE_CONNECTION_STRING || "",
-    containerName: process.env.AZURE_STORAGE_CONTAINER_NAME || "",
-    defaultDomain: process.env.AZURE_STORAGE_DEFAULT_BASE_URL || "",
-    assignedDomain: process.env.AZURE_STORAGE_ASSIGNED_BASE_URL || "",
-  },
-  email: {
-    fromName: process.env.SMTP_FROM_NAME || "",
-    fromEmail: process.env.SMTP_FROM_EMAIL || "",
-    replyToName: process.env.SMTP_REPLY_TO_NAME || "",
-    replyToEmail: process.env.SMTP_REPLY_TO_EMAIL || "",
-    developerEmail: process.env.DEVELOPER_EMAIL || "",
-  },
-  smtp: {
-    host: process.env.SMTP_HOST || "",
-    port: parseInt(process.env.SMTP_PORT || "587", 10),
-    username: process.env.SMTP_USERNAME || "",
-    password: process.env.SMTP_PASSWORD || "",
-  },
+    env,
+    jwt: {
+        secret: env.JWT_SECRET,
+        audience: env.JWT_AUDIENCE,
+        issuer: env.JWT_ISSUER,
+        expiresIn: env.JWT_EXPIRES_IN,
+        refreshSecret: env.JWT_REFRESH_SECRET,
+        refreshExpiresIn: env.JWT_REFRESH_EXPIRES_IN,
+    },
+    environment: env.NODE_ENV,
+    port: parseInt(env.PORT, 10),
+    api: {
+        clientId: env.CLIENT_ID,
+    },
+    app: {
+        name: env.APP_NAME,
+        version: env.APP_VERSION,
+        mode: env.APP_MODE,
+        description: env.APP_DESCRIPTION,
+        author: env.APP_AUTHOR,
+        url: env.APP_URL,
+    },
+    database: {
+        url: env.DATABASE_URL,
+    },
+    azureStorage: {
+        connectionString: env.AZURE_STORAGE_CONNECTION_STRING,
+        containerName: env.AZURE_STORAGE_CONTAINER_NAME,
+        defaultDomain: env.AZURE_STORAGE_DEFAULT_BASE_URL,
+        assignedDomain: env.AZURE_STORAGE_ASSIGNED_BASE_URL,
+    },
+    email: {
+        fromName: env.SMTP_FROM_NAME,
+        fromEmail: env.SMTP_FROM_EMAIL,
+        replyToName: env.SMTP_REPLY_TO_NAME,
+        replyToEmail: env.SMTP_REPLY_TO_EMAIL,
+        developerEmail: env.DEVELOPER_EMAIL,
+    },
+    smtp: {
+        host: env.SMTP_HOST,
+        port: parseInt(env.SMTP_PORT, 10),
+        username: env.SMTP_USERNAME,
+        password: env.SMTP_PASSWORD,
+    },
+    cors: {
+        origin: env.CORS_ORIGIN,
+    },
 };
 
 export default appConfig;
