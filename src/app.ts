@@ -1,28 +1,35 @@
 import "reflect-metadata";
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import * as bodyParser from "body-parser";
 import * as path from "path";
 import routes from "./routes/index.routes";
+import { errorMiddleware } from "./middleware/error.middleware";
+import { requestIdMiddleware } from "./middleware/request-id.middleware";
+import { NotFoundError } from "./utils/errors";
 
-// Load environment variables
 dotenv.config();
 
 const app = express();
 
-//setup public directory
 app.use(express.static(path.join(__dirname, "public")));
 
-// parse application/json
 app.use(bodyParser.json());
 
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//setup cors
 app.use(cors());
 
+app.use(requestIdMiddleware);
+
 app.use("/api", routes);
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+    const error = new NotFoundError(`Route ${req.method} ${req.url} not found`);
+    next(error);
+});
+
+app.use(errorMiddleware);
 
 export default app;
