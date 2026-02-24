@@ -5,7 +5,7 @@ import {
     paginationSchema,
     uuidSchema,
     idParamSchema,
-} from "../../src/utils/schemas/common.schema";
+} from "../../utils/schemas/common.schema";
 
 describe("Common Schemas", () => {
     describe("emailSchema", () => {

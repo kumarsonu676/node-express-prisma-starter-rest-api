@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { z } from "zod";
-import { validate } from "../../src/middleware/validate.middleware";
+import { validate } from "../../middleware/validate.middleware";
 import { mockResponse, mockNext } from "../utils/test-utils";
 
 describe("Validation Middleware", () => {

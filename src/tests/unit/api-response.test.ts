@@ -1,4 +1,4 @@
-import { ok, created, paginated } from "../../src/utils/api-response";
+import { ok, created, paginated } from "../../utils/api-response";
 import { Request } from "express";
 
 describe("API Response Utilities", () => {
