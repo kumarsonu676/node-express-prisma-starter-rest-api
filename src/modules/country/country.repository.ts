@@ -6,24 +6,20 @@ import { Prisma } from '../../prisma/generated/prisma/client';
 
 @injectable()
 export class CountryRepository {
-  constructor(private prisma = container.get<PrismaService>(TYPES_COMMON.PrismaService)) {
-    this.prisma = prisma;
-  }
+  constructor(
+    private prisma = container.get<PrismaService>(TYPES_COMMON.PrismaService)
+  ) {}
 
   async findAll(): Promise<Prisma.CountryGetPayload<{}>[]> {
     return this.prisma.country.findMany();
   }
 
   async findByCode(code: string): Promise<Prisma.CountryGetPayload<{}> | null> {
-    return this.prisma.country.findUnique({
-      where: { code },
-    });
+    return this.prisma.country.findUnique({ where: { code } });
   }
 
   async findByCodeIso3(codeIso3: string): Promise<Prisma.CountryGetPayload<{}> | null> {
-    return this.prisma.country.findUnique({
-      where: { codeIso3 },
-    });
+    return this.prisma.country.findUnique({ where: { codeIso3 } });
   }
 
   async count(): Promise<number> {

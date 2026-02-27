@@ -10,7 +10,6 @@ import type { RoleName, LoginResponse, CurrentUserResponse, JwtUser } from './au
 @injectable()
 export class AuthService {
   constructor(private authRepository = container.get<AuthRepository>(TYPES_AUTH.AuthRepository)) {
-    this.authRepository = authRepository;
   }
 
   async validateUser(username: string, password: string): Promise<JwtUser | null> {

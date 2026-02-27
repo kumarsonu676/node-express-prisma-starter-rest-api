@@ -1,4 +1,5 @@
 import { injectable } from 'inversify';
+import { Prisma } from '../../prisma/generated/prisma/client';
 import container from '../../config/ioc.config';
 import { TYPES_COUNTRY } from '../../config/ioc.types';
 import { CountryRepository } from './country.repository';
@@ -6,11 +7,11 @@ import type { CountryDto, CountryListResponse } from './country.types';
 
 @injectable()
 export class CountryService {
-  constructor(private countryRepository = container.get<CountryRepository>(TYPES_COUNTRY.CountryRepository)) {
-    this.countryRepository = countryRepository;
-  }
+  constructor(
+    private countryRepository = container.get<CountryRepository>(TYPES_COUNTRY.CountryRepository)
+  ) {}
 
-  private mapToDto(country: { name: string; code: string; codeIso3: string; createdAt: Date; updatedAt: Date | null }): CountryDto {
+  private toDto(country: Prisma.CountryGetPayload<{}>): CountryDto {
     return {
       name: country.name,
       code: country.code,
@@ -26,21 +27,16 @@ export class CountryService {
       this.countryRepository.count(),
     ]);
 
-    return {
-      countries: countries.map(this.mapToDto),
-      total,
-    };
+    return { countries: countries.map(this.toDto), total };
   }
 
   async getCountryByCode(code: string): Promise<CountryDto | null> {
     const country = await this.countryRepository.findByCode(code);
-    if (!country) return null;
-    return this.mapToDto(country);
+    return country ? this.toDto(country) : null;
   }
 
   async getCountryByCodeIso3(codeIso3: string): Promise<CountryDto | null> {
     const country = await this.countryRepository.findByCodeIso3(codeIso3);
-    if (!country) return null;
-    return this.mapToDto(country);
+    return country ? this.toDto(country) : null;
   }
 }

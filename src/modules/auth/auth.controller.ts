@@ -8,7 +8,6 @@ import type { LoginDto, RefreshTokenDto } from './auth.validation';
 
 export class AuthController {
   constructor(private authService = container.get<AuthService>(TYPES_AUTH.AuthService)) {
-    this.authService = authService;
   }
 
   public login = asyncHandler(async (req: Request, res: Response) => {

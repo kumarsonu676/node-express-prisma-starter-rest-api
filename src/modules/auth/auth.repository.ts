@@ -7,7 +7,6 @@ import { Role, User, UserRoleMapping } from '../../prisma/generated/prisma/clien
 @injectable()
 export class AuthRepository {
   constructor(private prisma = container.get<PrismaService>(TYPES_COMMON.PrismaService)) {
-    this.prisma = prisma;
   }
 
   async findByUsername(username: string): Promise<(User & { userRoles: (UserRoleMapping & { role: Role })[] }) | null> {
