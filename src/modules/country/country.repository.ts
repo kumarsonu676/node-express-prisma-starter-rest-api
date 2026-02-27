@@ -12,4 +12,16 @@ export class CountryRepository {
   async findAll() {
     return this.prisma.country.findMany();
   }
+
+  async findByCode(code: string) {
+    return this.prisma.country.findUnique({
+      where: { code },
+    });
+  }
+
+  async findByCodeIso3(codeIso3: string) {
+    return this.prisma.country.findUnique({
+      where: { codeIso3 },
+    });
+  }
 }

@@ -9,6 +9,7 @@ export const TYPES_COMMON = {
 export const TYPES_COUNTRY = {
   CountryRepository: Symbol.for('CountryRepository'),
   CountryService: Symbol.for('CountryService'),
+  CountryController: Symbol.for('CountryController'),
 };
 
 export const TYPES_AUTH = {

@@ -12,4 +12,12 @@ export class CountryService {
   async getAllCountries() {
     return this.countryRepository.findAll();
   }
+
+  async getCountryByCode(code: string) {
+    return this.countryRepository.findByCode(code);
+  }
+
+  async getCountryByCodeIso3(codeIso3: string) {
+    return this.countryRepository.findByCodeIso3(codeIso3);
+  }
 }

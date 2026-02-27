@@ -11,6 +11,7 @@ import { HealthController } from '../modules/health/health.controller';
 
 import { CountryRepository } from '../modules/country/country.repository';
 import { CountryService } from '../modules/country/country.service';
+import { CountryController } from '../modules/country/country.controller';
 
 const container = new Container();
 
@@ -20,6 +21,7 @@ container.bind<PrismaService>(TYPES_COMMON.PrismaService).to(PrismaService);
 container.bind<CountryService>(TYPES_COUNTRY.CountryService).to(CountryService);
 
 container.bind<CountryRepository>(TYPES_COUNTRY.CountryRepository).to(CountryRepository);
+container.bind<CountryController>(TYPES_COUNTRY.CountryController).to(CountryController);
 
 container.bind<AuthRepository>(TYPES_AUTH.AuthRepository).to(AuthRepository);
 container.bind<AuthService>(TYPES_AUTH.AuthService).to(AuthService);
