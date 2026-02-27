@@ -3,8 +3,9 @@ import { generateTokens, verifyAccessToken, verifyRefreshToken, decodeToken } fr
 describe("JWT Utilities", () => {
     const payload = {
         userId: "123",
+        username: "testuser",
+        roles: ["USER"],
         email: "test@example.com",
-        role: "user",
     };
 
     describe("generateTokens", () => {
@@ -30,8 +31,9 @@ describe("JWT Utilities", () => {
             const decoded = verifyAccessToken(tokens.accessToken);
 
             expect(decoded.userId).toBe(payload.userId);
+            expect(decoded.username).toBe(payload.username);
             expect(decoded.email).toBe(payload.email);
-            expect(decoded.role).toBe(payload.role);
+            expect(decoded.roles).toEqual(payload.roles);
         });
 
         it("should throw on invalid token", () => {

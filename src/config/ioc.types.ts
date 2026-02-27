@@ -7,3 +7,9 @@ export const TYPES = {
 
   CountryRepository: Symbol.for('CountryRepository'),
 };
+
+export const TYPES_AUTH = {
+  AuthRepository: Symbol.for('AuthRepository'),
+  AuthService: Symbol.for('AuthService'),
+  AuthController: Symbol.for('AuthController'),
+};

@@ -3,8 +3,9 @@ import appConfig from "../../config/app.config";
 
 export interface TokenPayload {
     userId: string;
-    email: string;
-    role?: string;
+    username: string;
+    roles: string[];
+    email?: string;
 }
 
 export interface RefreshPayload extends TokenPayload {
