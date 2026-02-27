@@ -1,14 +1,8 @@
-import { Request, Response, NextFunction } from "express";
-import { verifyAccessToken, TokenPayload } from "../utils/auth/jwt.util";
-import { UnauthorizedError, ErrorCode } from "../utils/errors";
+/// <reference path="../types/global.d.ts" />
 
-declare global {
-    namespace Express {
-        interface Request {
-            user?: TokenPayload;
-        }
-    }
-}
+import { Request, Response, NextFunction } from "express";
+import { verifyAccessToken } from "../utils/auth/jwt.util";
+import { UnauthorizedError, ErrorCode } from "../utils/errors";
 
 export const authenticate = (req: Request, res: Response, next: NextFunction): void => {
     try {
