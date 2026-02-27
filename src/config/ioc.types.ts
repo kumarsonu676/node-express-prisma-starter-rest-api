@@ -1,11 +1,14 @@
-export const TYPES = {
+export const TYPES_HEALTH = {
   HealthController: Symbol.for('HealthController'),
+};
 
-  UnitOfService: Symbol.for('UnitOfService'),
+export const TYPES_COMMON = {
   PrismaService: Symbol.for('PrismaService'),
-  CountryService: Symbol.for('CountryService'),
+};
 
+export const TYPES_COUNTRY = {
   CountryRepository: Symbol.for('CountryRepository'),
+  CountryService: Symbol.for('CountryService'),
 };
 
 export const TYPES_AUTH = {

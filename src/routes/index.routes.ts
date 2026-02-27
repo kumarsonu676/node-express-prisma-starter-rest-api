@@ -1,5 +1,5 @@
 import express from "express";
-import healthRouter from "./health.routes";
+import healthRouter from "../modules/health/health.routes";
 import docsRouter from "./docs.routes";
 import authRouter from "../modules/auth/auth.routes";
 

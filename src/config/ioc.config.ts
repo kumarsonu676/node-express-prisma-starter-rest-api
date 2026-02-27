@@ -1,25 +1,25 @@
 import { Container } from 'inversify';
-import { TYPES, TYPES_AUTH } from './ioc.types';
+import { TYPES_AUTH, TYPES_HEALTH, TYPES_COUNTRY, TYPES_COMMON } from './ioc.types';
 
-import { HealthController } from '../controllers/health.controller';
 import { PrismaService } from '../services/prisma.service';
-import { CountryRepository } from '../repositories/country.respository';
-import { CountryService } from '../services/country.service';
-import UnitOfService from '../services/unitof.service';
 
 import { AuthRepository } from '../modules/auth/auth.repository';
 import { AuthService } from '../modules/auth/auth.service';
 import { AuthController } from '../modules/auth/auth.controller';
 
+import { HealthController } from '../modules/health/health.controller';
+
+import { CountryRepository } from '../modules/country/country.repository';
+import { CountryService } from '../modules/country/country.service';
+
 const container = new Container();
 
-container.bind<HealthController>(TYPES.HealthController).to(HealthController);
+container.bind<HealthController>(TYPES_HEALTH.HealthController).to(HealthController);
 
-container.bind<PrismaService>(TYPES.PrismaService).to(PrismaService);
-container.bind<UnitOfService>(TYPES.UnitOfService).to(UnitOfService);
-container.bind<CountryService>(TYPES.CountryService).to(CountryService);
+container.bind<PrismaService>(TYPES_COMMON.PrismaService).to(PrismaService);
+container.bind<CountryService>(TYPES_COUNTRY.CountryService).to(CountryService);
 
-container.bind<CountryRepository>(TYPES.CountryRepository).to(CountryRepository);
+container.bind<CountryRepository>(TYPES_COUNTRY.CountryRepository).to(CountryRepository);
 
 container.bind<AuthRepository>(TYPES_AUTH.AuthRepository).to(AuthRepository);
 container.bind<AuthService>(TYPES_AUTH.AuthService).to(AuthService);

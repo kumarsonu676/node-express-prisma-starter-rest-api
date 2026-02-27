@@ -1,12 +1,12 @@
 import { injectable } from 'inversify';
 import container from '../../config/ioc.config';
-import { TYPES } from '../../config/ioc.types';
+import { TYPES_COMMON } from '../../config/ioc.types';
 import { PrismaService } from '../../services/prisma.service';
 import { Role, User, UserRoleMapping } from '../../prisma/generated/prisma/client';
 
 @injectable()
 export class AuthRepository {
-  constructor(private prisma = container.get<PrismaService>(TYPES.PrismaService)) {
+  constructor(private prisma = container.get<PrismaService>(TYPES_COMMON.PrismaService)) {
     this.prisma = prisma;
   }
 

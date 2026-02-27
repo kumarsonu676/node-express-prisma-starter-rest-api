@@ -1,13 +1,13 @@
 import app from "./app";
 import appConfig from "./config/app.config";
 import container from "./config/ioc.config";
-import { TYPES } from "./config/ioc.types";
+import { TYPES_COMMON } from "./config/ioc.types";
 import { PrismaService } from "./services/prisma.service";
 import { logger } from "./utils/logger";
 
 const PORT = appConfig.port || 3001;
 
-const prismaService = container.get<PrismaService>(TYPES.PrismaService);
+const prismaService = container.get<PrismaService>(TYPES_COMMON.PrismaService);
 
 const gracefulShutdown = async (signal: string): Promise<void> => {
     logger.info(`${signal} received. Starting graceful shutdown...`);
