@@ -17,3 +17,9 @@ export const TYPES_AUTH = {
   AuthService: Symbol.for('AuthService'),
   AuthController: Symbol.for('AuthController'),
 };
+
+export const TYPES_INTEGRATIONS = {
+  UploadService: Symbol.for('UploadService'),
+  EmailService: Symbol.for('EmailService'),
+  PaymentService: Symbol.for('PaymentService'),
+};

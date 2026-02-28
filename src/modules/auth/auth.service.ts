@@ -1,16 +1,19 @@
 import { injectable } from 'inversify';
 import container from '../../config/ioc.config';
-import { TYPES_AUTH } from '../../config/ioc.types';
+import { TYPES_AUTH, TYPES_INTEGRATIONS } from '../../config/ioc.types';
 import { AuthRepository } from './auth.repository';
 import { verifyPassword } from '../../utils/auth/password.util';
 import { generateTokens, verifyRefreshToken, TokenPair } from '../../utils/auth/jwt.util';
 import { UnauthorizedError, ErrorCode } from '../../utils/errors';
+import { SmtpEmailService } from '../../integrations/notification/smtp.adapter';
 import type { RoleName, LoginResponse, CurrentUserResponse, JwtUser } from './auth.types';
 
 @injectable()
 export class AuthService {
-  constructor(private authRepository = container.get<AuthRepository>(TYPES_AUTH.AuthRepository)) {
-  }
+  constructor(
+    private authRepository = container.get<AuthRepository>(TYPES_AUTH.AuthRepository),
+    private emailService = container.get<SmtpEmailService>(TYPES_INTEGRATIONS.EmailService)
+  ) { }
 
   async validateUser(username: string, password: string): Promise<JwtUser | null> {
     const user = await this.authRepository.findByUsername(username);
@@ -59,6 +62,37 @@ export class AuthService {
       },
       tokens,
     };
+  }
+
+  async sendWelcomeEmail(email: string, username: string): Promise<void> {
+    await this.emailService.sendEmail({
+      to: email,
+      subject: 'Welcome to Cricko!',
+      body: `Welcome, ${username}! Thank you for joining Cricko.`,
+      html: `
+        <h1>Welcome, ${username}!</h1>
+        <p>Thank you for joining Cricko. We're excited to have you on board!</p>
+        <p>If you have any questions, feel free to reach out to our support team.</p>
+        <br/>
+        <p>Best regards,<br/>The Cricko Team</p>
+      `,
+    });
+  }
+
+  async sendLoginNotification(email: string, username: string, ipAddress?: string): Promise<void> {
+    await this.emailService.sendEmail({
+      to: email,
+      subject: 'New login to your account',
+      body: `New login to your account${ipAddress ? ` from IP: ${ipAddress}` : ''}.`,
+      html: `
+        <h1>Login Alert</h1>
+        <p>Hi ${username},</p>
+        <p>We noticed a new login to your account${ipAddress ? ` from IP: ${ipAddress}` : ''}.</p>
+        <p>If this wasn't you, please secure your account immediately by changing your password.</p>
+        <br/>
+        <p>Best regards,<br/>The Cricko Team</p>
+      `,
+    });
   }
 
   generateTokens(user: JwtUser): TokenPair {

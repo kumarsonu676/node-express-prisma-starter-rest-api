@@ -1,5 +1,5 @@
 import { Container } from 'inversify';
-import { TYPES_AUTH, TYPES_HEALTH, TYPES_COUNTRY, TYPES_COMMON } from './ioc.types';
+import { TYPES_AUTH, TYPES_HEALTH, TYPES_COUNTRY, TYPES_COMMON, TYPES_INTEGRATIONS } from './ioc.types';
 
 import { PrismaService } from '../services/prisma.service';
 
@@ -12,6 +12,10 @@ import { HealthController } from '../modules/health/health.controller';
 import { CountryRepository } from '../modules/country/country.repository';
 import { CountryService } from '../modules/country/country.service';
 import { CountryController } from '../modules/country/country.controller';
+
+import { AzureBlobStorageService } from '../integrations/upload/azure.adapter';
+import { SmtpEmailService } from '../integrations/notification/smtp.adapter';
+import { StripePaymentService } from '../integrations/payment/stripe.adapter';
 
 const container = new Container();
 
@@ -26,5 +30,9 @@ container.bind<CountryController>(TYPES_COUNTRY.CountryController).to(CountryCon
 container.bind<AuthRepository>(TYPES_AUTH.AuthRepository).to(AuthRepository);
 container.bind<AuthService>(TYPES_AUTH.AuthService).to(AuthService);
 container.bind<AuthController>(TYPES_AUTH.AuthController).to(AuthController);
+
+container.bind<AzureBlobStorageService>(TYPES_INTEGRATIONS.UploadService).to(AzureBlobStorageService);
+container.bind<SmtpEmailService>(TYPES_INTEGRATIONS.EmailService).to(SmtpEmailService);
+container.bind<StripePaymentService>(TYPES_INTEGRATIONS.PaymentService).to(StripePaymentService);
 
 export default container;

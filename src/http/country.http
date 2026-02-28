@@ -1,0 +1,8 @@
+### Get All Countries
+GET {{baseUrl}}/countries
+
+### Get Country by Code (2-letter)
+GET {{baseUrl}}/countries/code/US
+
+### Get Country by ISO3 Code (3-letter)
+GET {{baseUrl}}/countries/code-iso3/USA

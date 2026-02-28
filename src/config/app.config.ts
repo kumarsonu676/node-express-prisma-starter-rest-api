@@ -54,6 +54,10 @@ const appConfig = {
     cors: {
         origin: env.CORS_ORIGIN,
     },
+    stripe: {
+        secretKey: env.STRIPE_SECRET_KEY,
+        webhookSecret: env.STRIPE_WEBHOOK_SECRET,
+    },
 };
 
 export default appConfig;

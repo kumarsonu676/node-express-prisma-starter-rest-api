@@ -31,6 +31,8 @@ export const envSchema = z.object({
     SMTP_REPLY_TO_EMAIL: z.string().email().optional(),
     DEVELOPER_EMAIL: z.string().email().optional(),
     CORS_ORIGIN: z.string().default("*"),
+    STRIPE_SECRET_KEY: z.string().optional(),
+    STRIPE_WEBHOOK_SECRET: z.string().optional(),
 });
 
 export type Env = z.infer<typeof envSchema>;

@@ -1,0 +1,25 @@
+### Health Check
+GET {{baseUrl}}/health
+
+### Login
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+### Refresh Token
+# @name doRefreshToken
+POST {{baseUrl}}/auth/refresh-token
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+### Get Current User (requires auth)
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{accessToken}}
