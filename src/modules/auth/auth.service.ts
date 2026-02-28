@@ -5,14 +5,14 @@ import { AuthRepository } from './auth.repository';
 import { verifyPassword } from '../../utils/auth/password.util';
 import { generateTokens, verifyRefreshToken, TokenPair } from '../../utils/auth/jwt.util';
 import { UnauthorizedError, ErrorCode } from '../../utils/errors';
-import { SmtpEmailService } from '../../integrations/notification/smtp.adapter';
+import { EmailService } from '../../integrations/notification/email.service';
 import type { RoleName, LoginResponse, CurrentUserResponse, JwtUser } from './auth.types';
 
 @injectable()
 export class AuthService {
   constructor(
     private authRepository = container.get<AuthRepository>(TYPES_AUTH.AuthRepository),
-    private emailService = container.get<SmtpEmailService>(TYPES_INTEGRATIONS.EmailService)
+    private emailService = container.get<EmailService>(TYPES_INTEGRATIONS.EmailService)
   ) { }
 
   async validateUser(username: string, password: string): Promise<JwtUser | null> {

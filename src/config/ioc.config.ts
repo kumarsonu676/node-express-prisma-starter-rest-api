@@ -14,8 +14,11 @@ import { CountryService } from '../modules/country/country.service';
 import { CountryController } from '../modules/country/country.controller';
 
 import { AzureBlobStorageService } from '../integrations/upload/azure.adapter';
+import { UploadService } from '../integrations/upload/upload.service';
 import { SmtpEmailService } from '../integrations/notification/smtp.adapter';
+import { EmailService } from '../integrations/notification/email.service';
 import { StripePaymentService } from '../integrations/payment/stripe.adapter';
+import { PaymentService } from '../integrations/payment/payment.service';
 
 const container = new Container();
 
@@ -31,8 +34,8 @@ container.bind<AuthRepository>(TYPES_AUTH.AuthRepository).to(AuthRepository);
 container.bind<AuthService>(TYPES_AUTH.AuthService).to(AuthService);
 container.bind<AuthController>(TYPES_AUTH.AuthController).to(AuthController);
 
-container.bind<AzureBlobStorageService>(TYPES_INTEGRATIONS.UploadService).to(AzureBlobStorageService);
-container.bind<SmtpEmailService>(TYPES_INTEGRATIONS.EmailService).to(SmtpEmailService);
-container.bind<StripePaymentService>(TYPES_INTEGRATIONS.PaymentService).to(StripePaymentService);
+container.bind<UploadService>(TYPES_INTEGRATIONS.UploadService).to(AzureBlobStorageService);
+container.bind<EmailService>(TYPES_INTEGRATIONS.EmailService).to(SmtpEmailService);
+container.bind<PaymentService>(TYPES_INTEGRATIONS.PaymentService).to(StripePaymentService);
 
 export default container;

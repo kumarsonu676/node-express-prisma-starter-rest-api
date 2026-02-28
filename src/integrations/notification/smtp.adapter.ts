@@ -21,6 +21,10 @@ export class SmtpEmailService extends EmailService {
     });
   }
 
+  async testConnection(): Promise<void> {
+    await this.transporter.verify();
+  }
+
   async sendEmail(options: SendEmailOptions): Promise<EmailResult> {
     const { email: emailConfig } = appConfig;
 
