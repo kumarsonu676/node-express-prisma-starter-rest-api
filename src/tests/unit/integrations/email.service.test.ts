@@ -1,4 +1,4 @@
-import { SmtpEmailService } from '../../integrations/notification/smtp.adapter';
+import { SmtpEmailService } from '../../../integrations/notification/smtp.adapter';
 import * as nodemailer from 'nodemailer';
 
 jest.mock('nodemailer', () => ({
@@ -7,7 +7,7 @@ jest.mock('nodemailer', () => ({
   }),
 }));
 
-jest.mock('../../config/app.config', () => ({
+jest.mock('../../../config/app.config', () => ({
   __esModule: true,
   default: {
     smtp: {

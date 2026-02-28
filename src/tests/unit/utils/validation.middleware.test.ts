@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { z } from "zod";
-import { validate } from "../../middleware/validate.middleware";
-import { mockResponse, mockNext } from "../utils/test-utils";
+import { validate } from "../../../middleware/validate.middleware";
+import { mockResponse, mockNext } from "../../utils/test-utils";
 
 describe("Validation Middleware", () => {
     let mockReq: Partial<Request>;
