@@ -11,7 +11,7 @@ export class PrismaService extends PrismaClient {
         connectionString: appConfig.database.url,
       }),
 
-      //log: appConfig.environment === 'development' ? ['query', 'info', 'warn', 'error'] : ['error'],
+      //log: appConfig.environment.isDevelopment ? ['query', 'info', 'warn', 'error'] : ['error'],
 
       transactionOptions: {
         isolationLevel: Prisma.TransactionIsolationLevel.Serializable,

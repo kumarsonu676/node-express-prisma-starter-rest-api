@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { AppError, ValidationError, ErrorCode, ErrorType } from "../utils/errors";
 import { handlePrismaError, isPrismaError } from "../utils/prisma-error-handler";
 import { logger } from "../utils/logger";
+import appConfig from "../config/app.config";
 
 interface ZodError {
     name?: string;
@@ -90,7 +91,7 @@ export const errorMiddleware = (
         statusCode,
         code,
         type,
-        message: isOperational || process.env.NODE_ENV !== "production" ? message : "An error occurred",
+        message: isOperational || !appConfig.environment.isProduction ? message : "An error occurred",
         timestamp: new Date().toISOString(),
         requestId,
     };
@@ -99,7 +100,7 @@ export const errorMiddleware = (
         response.errors = errors;
     }
 
-    if (process.env.NODE_ENV === "development" && err.stack) {
+    if (appConfig.environment.isDevelopment && err.stack) {
         response.stack = err.stack;
     }
 

@@ -1,6 +1,7 @@
 import winston from "winston";
 import DailyRotateFile from "winston-daily-rotate-file";
 import * as path from "path";
+import appConfig from "../config/app.config";
 
 const logDir = path.join(process.cwd(), "logs");
 
@@ -47,7 +48,7 @@ const transports: winston.transport[] = [
 ];
 
 export const logger = winston.createLogger({
-    level: process.env.NODE_ENV === "production" ? "info" : "debug",
+    level: appConfig.environment.isProduction ? "info" : "debug",
     format: logFormat,
     transports,
     exitOnError: false,

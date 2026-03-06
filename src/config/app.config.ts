@@ -16,7 +16,11 @@ const appConfig = {
         refreshSecret: env.JWT_REFRESH_SECRET,
         refreshExpiresIn: env.JWT_REFRESH_EXPIRES_IN,
     },
-    environment: env.NODE_ENV,
+    environment: {
+        isProduction: env.NODE_ENV === "production",
+        isDevelopment: env.NODE_ENV === "development",
+        isTest: env.NODE_ENV === "test"
+    },
     port: parseInt(env.PORT, 10),
     api: {
         clientId: env.CLIENT_ID,
