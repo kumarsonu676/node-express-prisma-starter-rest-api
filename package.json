@@ -1,5 +1,5 @@
 {
-  "name": "cricko-backend",
+  "name": "node-express-prisma-starter-rest-api",
   "version": "1.0.0",
   "description": "Production-ready Node.js REST API starter with Express, TypeScript, Prisma, JWT auth, and Docker support",
   "main": "server.js",

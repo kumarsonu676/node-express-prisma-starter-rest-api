@@ -1,4 +1,4 @@
-# Cricko Backend - Production-Ready REST API Starter
+# Node Express Prisma Starter REST API
 
 [![Node.js](https://img.shields.io/badge/Node.js-20.x-green)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
@@ -44,8 +44,8 @@ Perfect for quickly bootstrapping new Node.js projects with enterprise-grade arc
 
 ```bash
 # Clone the repo
-git clone https://github.com/kumarsonu676/cricko-backend.git
-cd cricko-backend
+git clone https://github.com/kumarsonu676/node-express-prisma-starter-rest-api.git
+cd node-express-prisma-starter-rest-api
 
 # Start with Docker
 docker-compose up --build
@@ -55,15 +55,15 @@ docker-compose up --build
 
 ```bash
 # Clone and install
-git clone https://github.com/kumarsonu676/cricko-backend.git
-cd cricko-backend
+git clone https://github.com/kumarsonu676/node-express-prisma-starter-rest-api.git
+cd node-express-prisma-starter-rest-api
 npm install
 
 # Setup environment
 cp .env.example .env
 
 # Start PostgreSQL with Docker
-docker run -d -p 5432:5432 -e POSTGRES_USER=cricko -e POSTGRES_PASSWORD=password -e POSTGRES_DB=cricko postgres:14
+docker run -d -p 5432:5432 -e POSTGRES_USER=app -e POSTGRES_PASSWORD=password -e POSTGRES_DB=app postgres:14
 
 # Generate client & run migrations
 npm run generate_prisma_client

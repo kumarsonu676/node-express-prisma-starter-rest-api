@@ -4,18 +4,18 @@ services:
   # PostgreSQL Database
   postgres:
     image: postgres:14-alpine
-    container_name: cricko-db
+    container_name: app-db
     restart: unless-stopped
     environment:
-      POSTGRES_USER: cricko
-      POSTGRES_PASSWORD: cricko_password
-      POSTGRES_DB: cricko
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app_password
+      POSTGRES_DB: app
     ports:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U cricko -d cricko']
+      test: ['CMD-SHELL', 'pg_isready -U app -d app']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -23,7 +23,7 @@ services:
   # Redis (optional - for caching/sessions)
   redis:
     image: redis:7-alpine
-    container_name: cricko-redis
+    container_name: app-redis
     restart: unless-stopped
     ports:
       - '6379:6379'
@@ -40,14 +40,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: cricko-api
+    container_name: app-api
     restart: unless-stopped
     ports:
       - '3001:3001'
     environment:
       NODE_ENV: development
       PORT: 3001
-      DATABASE_URL: postgresql://cricko:cricko_password@postgres:5432/cricko
+      DATABASE_URL: postgresql://app:app_password@postgres:5432/app
       JWT_SECRET: dev-jwt-secret-min-32-characters-long
       JWT_REFRESH_SECRET: dev-refresh-secret-min-32-characters-long
       CORS_ORIGIN: http://localhost:3000
@@ -61,7 +61,7 @@ services:
   # Adminer (optional - database GUI)
   adminer:
     image: adminer:latest
-    container_name: cricko-adminer
+    container_name: app-adminer
     restart: unless-stopped
     ports:
       - '8080:8080'

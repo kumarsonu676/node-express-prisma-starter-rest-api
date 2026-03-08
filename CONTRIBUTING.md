@@ -1,11 +1,11 @@
-# Contributing to Cricko API
+# Contributing to Node Express Prisma Starter REST API
 
 Thank you for your interest in contributing!
 
 ## Getting Started
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/kumarsonu676/cricko-backend.git`
+2. Clone your fork: `git clone https://github.com/kumarsonu676/node-express-prisma-starter-rest-api.git`
 3. Install dependencies: `npm install`
 4. Create a feature branch: `git checkout -b feature/your-feature-name`
 
