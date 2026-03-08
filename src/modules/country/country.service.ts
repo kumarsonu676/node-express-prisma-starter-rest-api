@@ -7,9 +7,7 @@ import type { CountryDto, CountryListResponse } from './country.types';
 
 @injectable()
 export class CountryService {
-  constructor(
-    private countryRepository = container.get<CountryRepository>(TYPES_COUNTRY.CountryRepository)
-  ) {}
+  constructor(private countryRepository = container.get<CountryRepository>(TYPES_COUNTRY.CountryRepository)) {}
 
   private toDto(country: Prisma.CountryGetPayload<{}>): CountryDto {
     return {
@@ -22,10 +20,7 @@ export class CountryService {
   }
 
   async getAllCountries(): Promise<CountryListResponse> {
-    const [countries, total] = await Promise.all([
-      this.countryRepository.findAll(),
-      this.countryRepository.count(),
-    ]);
+    const [countries, total] = await Promise.all([this.countryRepository.findAll(), this.countryRepository.count()]);
 
     return { countries: countries.map(this.toDto), total };
   }

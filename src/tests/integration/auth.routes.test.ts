@@ -79,7 +79,7 @@ describe('Auth Routes', () => {
     container.get.mockReturnValue(mockAuthService);
 
     const authController = new AuthController();
-    
+
     app = express();
     app.use(express.json());
     app.post('/auth/login', validate({ body: loginSchema }), authController.login);
@@ -91,9 +91,7 @@ describe('Auth Routes', () => {
     it('should return 200 and tokens on successful login', async () => {
       mockAuthService.login.mockResolvedValue(mockLoginResponse);
 
-      const response = await request(app)
-        .post('/auth/login')
-        .send({ username: 'testuser', password: 'password' });
+      const response = await request(app).post('/auth/login').send({ username: 'testuser', password: 'password' });
 
       expect(response.status).toBe(200);
       expect(response.body.status).toBe('success');
@@ -101,17 +99,13 @@ describe('Auth Routes', () => {
     });
 
     it('should return 400 if username is missing', async () => {
-      const response = await request(app)
-        .post('/auth/login')
-        .send({ password: 'password' });
+      const response = await request(app).post('/auth/login').send({ password: 'password' });
 
       expect(response.status).toBe(400);
     });
 
     it('should return 400 if password is missing', async () => {
-      const response = await request(app)
-        .post('/auth/login')
-        .send({ username: 'testuser' });
+      const response = await request(app).post('/auth/login').send({ username: 'testuser' });
 
       expect(response.status).toBe(400);
     });
@@ -127,18 +121,14 @@ describe('Auth Routes', () => {
       };
       mockAuthService.refreshToken.mockResolvedValue(tokenResponse);
 
-      const response = await request(app)
-        .post('/auth/refresh-token')
-        .send({ refreshToken: 'valid_refresh_token' });
+      const response = await request(app).post('/auth/refresh-token').send({ refreshToken: 'valid_refresh_token' });
 
       expect(response.status).toBe(200);
       expect(response.body.data).toEqual(tokenResponse);
     });
 
     it('should return 400 if refresh token is missing', async () => {
-      const response = await request(app)
-        .post('/auth/refresh-token')
-        .send({});
+      const response = await request(app).post('/auth/refresh-token').send({});
 
       expect(response.status).toBe(400);
     });

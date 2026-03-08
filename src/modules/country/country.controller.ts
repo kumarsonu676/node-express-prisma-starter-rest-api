@@ -6,9 +6,7 @@ import { ok } from '../../utils/api-response';
 import { asyncHandler } from '../../utils/asyncHandler';
 
 export class CountryController {
-  constructor(
-    private countryService = container.get<CountryService>(TYPES_COUNTRY.CountryService)
-  ) { }
+  constructor(private countryService = container.get<CountryService>(TYPES_COUNTRY.CountryService)) {}
 
   public getAllCountries = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.countryService.getAllCountries();

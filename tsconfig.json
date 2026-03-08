@@ -9,17 +9,8 @@
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": [
-      "node",
-      "jest"
-    ]
+    "types": ["node", "jest"]
   },
-  "include": [
-    "src/**/*",
-    "src/types/**/*.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/**/*", "src/types/**/*.d.ts"],
+  "exclude": ["node_modules", "dist"]
 }

@@ -12,11 +12,11 @@ export class AzureBlobStorageService extends UploadService {
     super();
     const config = appConfig.azureStorage;
     const connStr = config.connectionString;
-    
+
     if (!connStr) {
       throw new Error('Azure Storage connection string is not configured');
     }
-    
+
     this.connectionString = connStr;
 
     const blobServiceClient = BlobServiceClient.fromConnectionString(connStr);
@@ -30,7 +30,7 @@ export class AzureBlobStorageService extends UploadService {
     const blobName = folder ? `${folder}/${fileName}` : fileName;
 
     const blockBlobClient = this.containerClient.getBlockBlobClient(blobName);
-    
+
     await blockBlobClient.uploadData(buffer, {
       blobHTTPHeaders: {
         blobContentType: options.mimeType || 'application/octet-stream',
@@ -57,14 +57,14 @@ export class AzureBlobStorageService extends UploadService {
   private generateSasToken(key: string, expiresIn: number): string {
     const match = this.connectionString.match(/AccountName=([^;]+)/);
     const matchKey = this.connectionString.match(/AccountKey=([^;]+)/);
-    
+
     if (!match || !matchKey) {
       throw new Error('Invalid Azure Storage connection string format');
     }
-    
+
     const accountName = match[1];
     const accountKey = matchKey[1];
-    
+
     const expiryDate = new Date();
     expiryDate.setSeconds(expiryDate.getSeconds() + expiresIn);
 
@@ -83,10 +83,7 @@ export class AzureBlobStorageService extends UploadService {
     ].join('\n');
 
     const crypto = require('crypto');
-    const signature = crypto
-      .createHmac('sha256', Buffer.from(accountKey, 'base64'))
-      .update(stringToSign)
-      .digest('base64');
+    const signature = crypto.createHmac('sha256', Buffer.from(accountKey, 'base64')).update(stringToSign).digest('base64');
 
     const sasToken = new URLSearchParams({
       sv: version,

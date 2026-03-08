@@ -6,9 +6,7 @@ import { Prisma } from '../../prisma/generated/prisma/client';
 
 @injectable()
 export class CountryRepository {
-  constructor(
-    private prisma = container.get<PrismaService>(TYPES_COMMON.PrismaService)
-  ) {}
+  constructor(private prisma = container.get<PrismaService>(TYPES_COMMON.PrismaService)) {}
 
   async findAll(): Promise<Prisma.CountryGetPayload<{}>[]> {
     return this.prisma.country.findMany();

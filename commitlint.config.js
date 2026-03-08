@@ -5,16 +5,16 @@ module.exports = {
       2,
       'always',
       [
-        'feat',     // New feature
-        'fix',      // Bug fix
-        'docs',     // Documentation
-        'style',    // Formatting
+        'feat', // New feature
+        'fix', // Bug fix
+        'docs', // Documentation
+        'style', // Formatting
         'refactor', // Code restructuring
-        'test',     // Tests
-        'chore',    // Maintenance
-        'ci',       // CI/CD
-        'perf',     // Performance
-        'revert',   // Revert
+        'test', // Tests
+        'chore', // Maintenance
+        'ci', // CI/CD
+        'perf', // Performance
+        'revert', // Revert
       ],
     ],
     'type-case': [2, 'always', 'lower-case'],

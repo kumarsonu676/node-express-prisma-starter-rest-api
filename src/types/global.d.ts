@@ -1,13 +1,13 @@
-import { TokenPayload } from "../utils/auth/jwt.util";
+import { TokenPayload } from '../utils/auth/jwt.util';
 
 declare global {
-    namespace Express {
-        interface Request {
-            id?: string;
-            requestTime?: Date;
-            user?: TokenPayload;
-        }
+  namespace Express {
+    interface Request {
+      id?: string;
+      requestTime?: Date;
+      user?: TokenPayload;
     }
+  }
 }
 
-export { };
+export {};

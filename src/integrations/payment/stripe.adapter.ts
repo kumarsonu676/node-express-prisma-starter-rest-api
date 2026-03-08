@@ -9,7 +9,7 @@ export class StripePaymentService extends PaymentService {
   constructor() {
     super();
     const secretKey = appConfig.stripe.secretKey;
-    
+
     if (!secretKey) {
       throw new Error('Stripe secret key is not configured');
     }

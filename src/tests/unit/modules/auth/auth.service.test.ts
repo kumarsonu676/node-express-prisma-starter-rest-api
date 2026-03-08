@@ -66,7 +66,7 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    
+
     mockAuthRepository = {
       findByUsername: jest.fn(),
       findByIdWithRoles: jest.fn(),

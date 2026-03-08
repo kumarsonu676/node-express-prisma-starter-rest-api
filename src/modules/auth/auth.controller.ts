@@ -7,8 +7,7 @@ import { asyncHandler } from '../../utils/asyncHandler';
 import type { LoginDto, RefreshTokenDto } from './auth.validation';
 
 export class AuthController {
-  constructor(private authService = container.get<AuthService>(TYPES_AUTH.AuthService)) {
-  }
+  constructor(private authService = container.get<AuthService>(TYPES_AUTH.AuthService)) {}
 
   public login = asyncHandler(async (req: Request, res: Response) => {
     const { username, password } = req.body as LoginDto;
