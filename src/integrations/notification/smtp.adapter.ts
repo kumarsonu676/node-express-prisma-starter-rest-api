@@ -14,15 +14,14 @@ export class SmtpEmailService extends EmailService {
       host: smtp.host,
       port: smtp.port,
       secure: smtp.port === 465,
-      auth: smtp.username && smtp.password ? {
-        user: smtp.username,
-        pass: smtp.password,
-      } : undefined,
+      auth:
+        smtp.username && smtp.password
+          ? {
+              user: smtp.username,
+              pass: smtp.password,
+            }
+          : undefined,
     });
-  }
-
-  async testConnection(): Promise<void> {
-    await this.transporter.verify();
   }
 
   async sendEmail(options: SendEmailOptions): Promise<EmailResult> {

@@ -13,7 +13,7 @@ export class AuthService {
   constructor(
     private authRepository = container.get<AuthRepository>(TYPES_AUTH.AuthRepository),
     private emailService = container.get<EmailService>(TYPES_INTEGRATIONS.EmailService)
-  ) { }
+  ) {}
 
   async validateUser(username: string, password: string): Promise<JwtUser | null> {
     const user = await this.authRepository.findByUsername(username);
