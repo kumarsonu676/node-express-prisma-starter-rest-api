@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run prettier on staged files
+npx prettier --write .
+
+# Run tests
+npm run test
