@@ -1,7 +1,7 @@
 {
-  "name": "cricko-api",
+  "name": "cricko-backend",
   "version": "1.0.0",
-  "description": "Cricket scoring app api",
+  "description": "Production-ready Node.js REST API starter with Express, TypeScript, Prisma, JWT auth, and Docker support",
   "main": "server.js",
   "scripts": {
     "prepare": "husky install",
